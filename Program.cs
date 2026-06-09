@@ -1,110 +1,93 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using System.Linq;
-using System;
+﻿using System.ComponentModel.Design;
+using System.Reflection.Metadata;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
 
-namespace My_awesome_c__program;
+namespace Contact_book;
 
+class Contact_book
+{
+    public string name;
+    public string number;
+    public string address;
+}
 class Program
 {
-    
     static void Main(string[] args)
     {
+
+        bool enterinfo = true;
+        List<Contact_book> contacts = new List<Contact_book>();
+        List<string> contactorder = new List<string>();
         start:
         Console.ForegroundColor = ConsoleColor.Red;
-        Random x = new Random();
-        int prepick = x.Next(1, 101);
-        Console.WriteLine("This is the number guessing game!");
+        Console.WriteLine("to view a contact, type 'view'. to enter contacts, type 'enter'");
         Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine("Please input your guess! (between 1 and 100)");
-        Console.WriteLine(prepick);
-        Console.ForegroundColor = ConsoleColor.Blue;
-        string? response = Console.ReadLine();
-        if (int.TryParse(response, out int guess))
+        string direction = Console.ReadLine();
+        if (direction is "enter")
         {
-          if (guess != prepick)
+          enterinfo = true;
+          while (enterinfo == true)
           {
-           string? response2 = response;
-                while (guess != prepick)
-                {
-                  
-                    if (int.TryParse(response2, out guess))
-                    {
-                    if (guess < prepick)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine("HIGHER");
-                    }
-                    else if (guess > prepick)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine("LOWER");
-                    }
-                    else if (guess == prepick)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("YOU WIN!!!");
-                        Console.ForegroundColor = ConsoleColor.White;
-                        Console.WriteLine("type 'again' to play again!");
-                        Console.ForegroundColor = ConsoleColor.Blue;
-                        string? again = Console.ReadLine();
-                        if (again == "again")
-                        {
-                            goto start;
-                        }
-                        else
-                        {
-                            goto end;
-                        }
-                       
-                    
-                    }
-                    Console.ForegroundColor = ConsoleColor.White;
-                     Console.WriteLine("Please input your guess! (between 1 and 100)");
-                     Console.ForegroundColor = ConsoleColor.Blue;
-                   response2 = Console.ReadLine();
-                    }
-                    else
-                    {
-                        Console.ForegroundColor = ConsoleColor.DarkRed;
-                     Console.WriteLine("please input an integer between 1 and 100");
-                     Console.ForegroundColor = ConsoleColor.Blue;
-                   response2 = Console.ReadLine();
-                    }
-                    
-                    
-                    
-                    
-                }
+        
+          Console.ForegroundColor = ConsoleColor.Blue;
+          Console.WriteLine("Please input the name of who you want to add as a contact(enter 'stop' to stop entering contacts)");
+          Console.ForegroundColor = ConsoleColor.White;
+          String inputname = Console.ReadLine();
+          if (inputname is "stop")
+           {
+                enterinfo = false;
+                goto start;
            }
         else
-            {
-                Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("YOU WIN!!!");
-                        Console.ForegroundColor = ConsoleColor.White;
-                        Console.WriteLine("type 'again' to play again!");
-                        Console.ForegroundColor = ConsoleColor.Blue;
-                        string? again = Console.ReadLine();
-                        if (again == "again")
-                        {
-                            goto start;
-                        }
-                        else
-                        {
-                            goto end;
-                        }
-            }
-
+           {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("please input the number of the contact (enter N/A if not applicable)");
+            Console.ForegroundColor = ConsoleColor.White;
+            String inputnumber = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("please input the address of the contact(enter N/A if not applicable)");
+            Console.ForegroundColor = ConsoleColor.White;
+            String inputaddress = Console.ReadLine();
+            Contact_book contact = new Contact_book();
+            contact.name = inputname;
+            contact.number = inputnumber;
+            contact.address = inputaddress;
+            contacts.Add(contact);
+            contactorder.Add(inputname);
+            
+           }
+          }
+        
         }
-        else
+        else if (direction is "view")
         {
-            Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.WriteLine("please input an integer between 1 and 100");
+            
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("please enter the name of the contact you would like to view");
+            Console.ForegroundColor = ConsoleColor.White;
+            string findinput = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("here is the info");
+            int index = contactorder.IndexOf(findinput);
+            Contact_book foundcontact = contacts[index];
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("name: ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(foundcontact.name);
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("number: ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(foundcontact.number);
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("address: ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(foundcontact.address);
+            Console.ForegroundColor = ConsoleColor.White;
             goto start;
-        }
-        end:
-        Console.WriteLine("bye!");
 
+        }
+       
+        Console.ReadKey();
     }
-    
-   
 }
