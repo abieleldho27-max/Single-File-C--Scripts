@@ -41,4 +41,10 @@ These are scripts that I created in VS Code, meant to be run within the terminal
 - Create a system that changes the difficulty (decreasing the range of possible numbers or adding a Hot/Cold system to help with getting closer)
 #### Demo Video
  
- 
+[Number Guessing Demo Vid](https://youtu.be/KbcmhYE3rwg)
+
+## Tools Used
+- Editor - Visual Studio Code
+
+## Author
+Abiel Eldho
