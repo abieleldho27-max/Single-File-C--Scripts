@@ -28,7 +28,7 @@ These are scripts that I created in VS Code, meant to be run within the terminal
 - Add more planets and more artifacts
 #### Demo Video
 
-[Contact Book Demo Vid](https://youtu.be/XzyHxM-FFps)
+[Space Game Demo Vid](https://youtu.be/XzyHxM-FFps)
 
 ### Number Guessing Game
 #### Overview
